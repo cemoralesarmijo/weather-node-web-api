@@ -14,6 +14,14 @@ router.post('/weather', async(req, res, next) => {
         e.statusCode = 500
         next(e)
     }
-});
+})
+
+router.get('/home', async(req, res, next) => {
+    try {
+        res.send('Wellcome to weather API');
+    } catch (e) {
+        next(e)
+    }
+})
 
 module.exports = router

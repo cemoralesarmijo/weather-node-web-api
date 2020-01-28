@@ -18,7 +18,7 @@ app.use(express.json())
 app.use('/api', routes)
 
 
-// E R R O R  H A N D L E R
+
 app.use((req, res, next) => {
     const err = new Error('Not Found')
     res.statusCode = 404
