@@ -1,19 +1,24 @@
 {
-  "name": "weather-node-web-api",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/cemoralesarmijo/weather-node-web-api.git",
-  "author": "César Alejandro Morales Armijo",
-  "license": "BSD 2-Clause License",
-  "scripts": {
-    "dev": "nodemon server.js"
-  },
-  "dependencies": {
-    "axios": "^0.19.2",
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "dotenv": "^8.2.0",
-    "nodemon": "^2.0.2"
-  }
+    "name": "weather-node-web-api",
+    "private": true,
+    "version": "1.0.0",
+    "main": "src/app.js",
+    "repository": "https://github.com/cemoralesarmijo/weather-node-web-api.git",
+    "author": "César Alejandro Morales Armijo",
+    "license": "BSD 2-Clause License",
+    "scripts": {
+        "prd": "node src/app.js",
+        "dev": "nodemon src/app.js"
+    },
+    "dependencies": {
+        "axios": "^0.19.2",
+        "express": "^4.17.1",
+        "path": "^0.12.7"
+    },
+    "devDependencies": {
+        "chalk": "^3.0.0",
+        "debug": "^4.1.1",
+        "dotenv": "^8.2.0",
+        "nodemon": "^2.0.2"
+    }
 }
