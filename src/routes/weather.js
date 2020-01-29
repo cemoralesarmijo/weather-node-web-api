@@ -4,11 +4,13 @@ const router = express.Router()
 
 const weatherController = require('../controllers/weatherController')
 
+const { cacheHandler } = require('../middlewares/cacheHandler')
+
 const Redis = require('../utils/redis')
 
 const redis = new Redis()
 
-router.post('/weather', cache, async(req, res, next) => {
+router.post('/weather', cacheHandler, async(req, res, next) => {
     try {
         const { latitude, longitude } = req.body
 
@@ -18,9 +20,9 @@ router.post('/weather', cache, async(req, res, next) => {
 
         const cacheExp = process.env.REDIS_CACHE_EXP
 
-        await redis.save(searchKey, cacheExp, data.currently);
+        await redis.save(searchKey, cacheExp, data.toString());
 
-        res.send(setResponse(searchKey, data.currently));
+        res.json(setWeatherData(data));
     } catch (e) {
         e.statusCode = 500
         next(e)
@@ -28,27 +30,14 @@ router.post('/weather', cache, async(req, res, next) => {
 })
 
 
-// Cache middleware
-async function cache(req, res, next) {
-    const { latitude, longitude } = req.params;
-    const searchKey = `${latitude}${longitude}`
-
-    const data = await redis.get(searchKey)
-    console.log('data', data)
-    try {
-        if (data !== null) {
-            res.send(setResponse(username, data));
-        } else {
-            next();
-        }
-    } catch (error) {
-        next(error)
+function setWeatherData(data) {
+    return {
+        locationElement: data.place,
+        statusElement: data.summary,
+        temperatureElement: data.temperature,
+        precipitationElement: `${data.precipProbability * 100}%`,
+        windElement: data.windSpeed
     }
-
-}
-
-function setResponse(searchKey, response) {
-    return `<h2> search Key:${searchKey}</h2>`;
 }
 
 

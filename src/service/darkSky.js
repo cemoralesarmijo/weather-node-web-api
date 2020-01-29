@@ -5,8 +5,8 @@ const DARKSKY_URL = process.env.DARKSKY_URL;
 
 /**
  * - Forecast service from  dark sky API
- * @param {String} latitude 
- * @param {String} longitude 
+ * @param {String} latitude
+ * @param {String} longitude
  */
 async function forecast(latitude, longitude) {
 
@@ -31,7 +31,7 @@ async function forecast(latitude, longitude) {
         return {
             success: true,
             message: 'Petición externa con servicio darkSky realizada exitósamente',
-            data: response.data,
+            data: response.data.currently,
             optionsRequest: options
 
         }
