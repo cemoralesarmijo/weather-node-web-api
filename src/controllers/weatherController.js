@@ -1,15 +1,9 @@
 const { forecast } = require('../service/darkSky');
 
-async function main(req) {
+async function main(latitude, longitude) {
     try {
+        const resWeather = await forecast(latitude, longitude)
 
-        const resWeather = await forecast(req.body.latitude, req.body.longitude)
-
-        if (!resWeather.success) {
-            return resWeather
-        }
-
-        // sigo con respuesta exitosa
         return resWeather
 
     } catch (error) {

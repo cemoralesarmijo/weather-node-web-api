@@ -1,6 +1,6 @@
 FROM node:10
 
-LABEL weather-api "Cesar Morales Armijo <ce.moralesar@gmail.com>"
+LABEL weather-api "Cesar Morales Armijo <ce.moralesarmijo@gmail.com>"
 
 COPY ["package.json", "yarn.lock", "/usr/src/"]
 
